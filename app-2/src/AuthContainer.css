@@ -18,6 +18,10 @@
     padding: 1vmin 2vmin;
 }
 
+.AuthContainer-margin {
+   margin-left: 12px;
+}
+
 .AuthContainer-pre {
     background-color: cornsilk;
 }

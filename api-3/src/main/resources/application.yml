@@ -1,0 +1,19 @@
+server:
+  port: 7070
+
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak:
+            client-id: "api-3"
+            client-name: "api-3"
+            client-secret: "2652a05c-3b87-4a2e-9941-36428f3b2176"
+            provider: "keycloak"
+        provider:
+          keycloak:
+            issuer-uri: "http://localhost:8000/auth/realms/development"
+            jwk-set-uri: "http://localhost:8000/auth/realms/development/protocol/openid-connect/certs"
+
+

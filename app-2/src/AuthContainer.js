@@ -48,6 +48,36 @@ function AuthContainer({ authenticated, token, refreshToken, profile, login, log
       })
   }
 
+  function sendOauth2Hello() {
+    get(keycloak, 'http://localhost:7070/user/hello')
+        .then(function (text) {
+          alert(text)
+        })
+        .catch(function (error) {
+          if (error instanceof PermissionError) {
+            alert(error.message)
+          } else {
+            console.log(error)
+            alert('Network error')
+          }
+        })
+  }
+
+  function sendOauth2AdminUpHello() {
+    get(keycloak, 'http://localhost:7070/user/upHello')
+        .then(function (text) {
+          alert(text)
+        })
+        .catch(function (error) {
+          if (error instanceof PermissionError) {
+            alert(error.message)
+          } else {
+            console.log(error)
+            alert('Network error')
+          }
+        })
+  }
+
   return (
     <main className="AuthContainer-main">
       <div className="AuthContainer-token">
@@ -92,23 +122,40 @@ function AuthContainer({ authenticated, token, refreshToken, profile, login, log
               {
                 keycloak.hasResourceRole('ADMIN', 'api-1') &&
                   keycloak.hasResourceRole('UP_ADMIN', 'api-2') &&
-                  <div>
-                    <button className="AuthContainer-button" onClick={sendAdminUpHello}>Send ADMIN Upstream Hello
-                    </button>
-                  </div>
+                    <>
+                      <div>
+                        <button className="AuthContainer-button" onClick={sendAdminUpHello}>Send ADMIN Upstream Hello
+                        </button>
+                      </div>
+
+                      <div>
+                        <button className="AuthContainer-button" onClick={sendOauth2AdminUpHello}>Send Oauth2 ADMIN Upstream Hello
+                        </button>
+                      </div>
+                      </>
               }
               {
                 keycloak.hasResourceRole('USER', 'api-1') &&
-                <div>
+                (
+                    <>
+                    <div>
                   <button className="AuthContainer-button" onClick={sendUserHello}>Send USER Hello</button>
-                </div>
+                    </div>
+                    <div>
+                      <button className="AuthContainer-button" onClick={sendOauth2Hello}>Send Oauth2 Hello</button>
+
+                    </div>
+                      </>
+                )
               }
               <div>
                 <button className="AuthContainer-button" onClick={logout}>Logout</button>
               </div>
             </>
-            :
-            <button className="AuthContainer-button" onClick={login}>Login</button>
+            :(
+              <button className="AuthContainer-button" onClick={login}>Login</button>
+              )
+
         }
       </div>
     </main>

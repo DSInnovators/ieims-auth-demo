@@ -54,7 +54,7 @@ function App() {
 
   function logout() {
     if (keycloak) {
-      keycloak.logout()
+      keycloak.logout();
     }
   }
 

@@ -1,6 +1,27 @@
 {
   "realm" : "development",
-  "users" : [ {
+  "users" : [ 
+  {
+      "id": "af3cea9b-ca97-4cdc-8eed-da2f67dda387",
+      "username": "kabir",
+      "enabled": true,
+      "email": "kabir@demo.com",
+      "firstName": "Kabir",
+      "lastName": "Singh",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "kabir"
+        }
+      ],
+      "clientRoles": {
+        "account": [
+          "view-profile",
+          "manage-account"
+        ]
+      }
+    },
+  {
     "id" : "5a9cf94e-8fbb-4f63-9663-3b44316fb7c4",
     "createdTimestamp" : 1626225924365,
     "username" : "ananta",
