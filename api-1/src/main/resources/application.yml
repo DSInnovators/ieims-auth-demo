@@ -1,15 +1,21 @@
 keycloak:
-  realm: development
+  realm: master
   bearer-only: true
-  auth-server-url: http://localhost:8000/auth
+  auth-server-url: http://localhost:8080/auth
   ssl-required: external
   resource: api-1
-  verify-token-audience: true
+  #verify-token-audience: true
   use-resource-role-mappings: true
   confidential-port: 0
   principal-attribute: preferred_username
+  credentials:
+    secret: y0HpwUMUS7d8epbh1ZYB5iP65LWh94iA
 
 logging:
   level:
     ieims.api1: debug
     org.keycloak: debug
+server:
+  port: 8888
+
+
