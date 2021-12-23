@@ -5,7 +5,7 @@ keycloak:
   ssl-required: external
   resource: api-1
   #verify-token-audience: true
-  use-resource-role-mappings: true
+  use-resource-role-mappings: false
   confidential-port: 0
   principal-attribute: preferred_username
   credentials:
