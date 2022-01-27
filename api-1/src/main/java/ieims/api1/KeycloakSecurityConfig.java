@@ -74,6 +74,7 @@ public class KeycloakSecurityConfig extends KeycloakWebSecurityConfigurerAdapter
         super.configure(http);
         http.authorizeRequests()
                 .antMatchers("/admin/*").hasRole("ADMIN")
+                .antMatchers("/upHello").hasRole("SUPER_ADMIN")
                 .antMatchers("/user/*").hasRole("USER")
                 .anyRequest().denyAll();
         http.cors();

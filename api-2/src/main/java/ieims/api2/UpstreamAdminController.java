@@ -17,7 +17,7 @@ public class UpstreamAdminController {
 
     @GetMapping("/hello")
     public String hello(Principal principal) {
-        String name = principal.getName();
+        String name = principal !=null ? principal.getName() : "";
         log.debug("hello, principal.name: {}", name);
 
         return "Upstream hello: " + name;

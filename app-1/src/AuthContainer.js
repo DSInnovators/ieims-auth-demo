@@ -34,7 +34,7 @@ function AuthContainer({ authenticated, token, refreshToken, profile, login, log
   }
 
   function sendUserHello() {
-    get(keycloak, 'http://localhost:8080/user/hello')
+    get(keycloak, 'http://localhost:8888/user/hello')
       .then(function (text) {
         alert(text)
       })
@@ -89,15 +89,15 @@ function AuthContainer({ authenticated, token, refreshToken, profile, login, log
                 </div>
               }
               {
-                keycloak.hasResourceRole('ADMIN', 'api-1') &&
-                  keycloak.hasResourceRole('UP_ADMIN', 'api-2') &&
+                keycloak.hasRealmRole('ADMIN', 'api-1') &&
+                  keycloak.hasRealmRole('SUPER_ADMIN', 'api-2') &&
                   <div>
                     <button className="AuthContainer-button" onClick={sendAdminUpHello}>Send ADMIN Upstream Hello
                     </button>
                   </div>
               }
               {
-                keycloak.hasResourceRole('USER', 'api-1') &&
+                keycloak.hasRealmRole('USER', 'api-1') &&
                 <div>
                   <button className="AuthContainer-button" onClick={sendUserHello}>Send USER Hello</button>
                 </div>

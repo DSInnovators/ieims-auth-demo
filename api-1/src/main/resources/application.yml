@@ -1,15 +1,14 @@
 keycloak:
-  realm: master
+  realm: IEIMS
   bearer-only: true
-  auth-server-url: http://localhost:8080/auth
+  auth-server-url: http://localhost:8000/auth
   ssl-required: external
   resource: api-1
-  #verify-token-audience: true
   use-resource-role-mappings: false
   confidential-port: 0
   principal-attribute: preferred_username
   credentials:
-    secret: y0HpwUMUS7d8epbh1ZYB5iP65LWh94iA
+    secret: 78FIbGw1FwtpOnryp9ULMRkt4eO2hFzl
 
 logging:
   level:

@@ -5,8 +5,8 @@ import AuthContainer from './AuthContainer'
 import './App.css'
 
 const keycloakConfig = {
-  url: 'http://localhost:8080/auth/',
-  realm: 'master',
+  url: 'http://localhost:8000/auth/',
+  realm: 'IEIMS',
   clientId: 'next-client',
 }
 
