@@ -45,7 +45,26 @@
   "maxDeltaTimeSeconds" : 43200,
   "failureFactor" : 30,
   "roles" : {
-    "realm" : [ {
+    "realm" : [
+      {
+        "id": "ebd610e1-327d-43b0-acbe-f2079311876a",
+        "name": "ADMIN",
+        "description": "USER WITH ADMIN PRIVILEGES",
+        "composite": false,
+        "clientRole": false,
+        "containerId": "development",
+        "attributes": {}
+      },
+      {
+        "id": "b71ac8de-2275-49b1-bf56-3138090b0121",
+        "name": "USER",
+        "description": "Demo user role",
+        "composite": false,
+        "clientRole": false,
+        "containerId": "development",
+        "attributes": {}
+      },
+      {
       "id" : "b4081131-00dc-4520-883d-04e9f3f4e0c1",
       "name" : "default-roles-development",
       "description" : "${role_default-roles}",
@@ -258,21 +277,6 @@
         "composite" : false,
         "clientRole" : true,
         "containerId" : "c4293ff1-c882-469e-a61e-f89dfc8f37fa",
-        "attributes" : { }
-      } ],
-      "api-1" : [ {
-        "id" : "d3026685-b61f-462f-895f-4310294f2348",
-        "name" : "USER",
-        "composite" : false,
-        "clientRole" : true,
-        "containerId" : "b08ebf77-b8c5-4567-8e99-b09a986a0e02",
-        "attributes" : { }
-      }, {
-        "id" : "8803728b-b3f4-48f0-aba5-956d2c7f466a",
-        "name" : "ADMIN",
-        "composite" : false,
-        "clientRole" : true,
-        "containerId" : "b08ebf77-b8c5-4567-8e99-b09a986a0e02",
         "attributes" : { }
       } ],
       "app-mvc" : [ {

@@ -6,8 +6,8 @@ import './App.css'
 
 const keycloakConfig = {
   url: 'http://localhost:8000/auth/',
-  realm: 'IEIMS',
-  clientId: 'teacher-client',
+  realm: 'development',
+  clientId: 'app-2',
 }
 
 function App() {

@@ -2,16 +2,15 @@ server:
   port: 9090
 
 keycloak:
-  realm: IEIMS
+  realm: development
   bearer-only: true
   auth-server-url: http://localhost:8000/auth
   ssl-required: external
   resource: api-2
+  #verify-token-audience: true
   use-resource-role-mappings: false
   confidential-port: 0
   principal-attribute: preferred_username
-  credentials:
-    secret: cJDypObD319RU4dqJpbBbmwaXFQRnVnZ
 
 logging:
   level:

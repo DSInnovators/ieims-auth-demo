@@ -6,8 +6,9 @@ import './App.css'
 
 const keycloakConfig = {
   url: 'http://localhost:8000/auth/',
-  realm: 'IEIMS',
-  clientId: 'next-client',
+  realm: 'development',
+  clientId: 'app-1',
+
 }
 
 function App() {
@@ -37,10 +38,10 @@ function App() {
         .then(prof => setProfile(prof))
         .catch(error => console.log('Error loading user profile', error))
 
-      kc.onAuthLogout = function () {
+     /* kc.onAuthLogout = function () {
         console.log('Keycloak session logout detected')
         setAuth({})
-      }
+      }*/
     }).catch(function (error) {
       console.log('Failed to initialize Keycloak', error)
     })

@@ -1,19 +1,20 @@
 keycloak:
-  realm: IEIMS
-  bearer-only: true
+  realm: development
+  bearer-only: false
   auth-server-url: http://localhost:8000/auth
   ssl-required: external
   resource: api-1
+  #verify-token-audience: true
   use-resource-role-mappings: false
   confidential-port: 0
   principal-attribute: preferred_username
   credentials:
-    secret: 78FIbGw1FwtpOnryp9ULMRkt4eO2hFzl
+    secret: ztVM2Ig8ApONrNtI5wJVcbWGApCt9t8Z
 
 logging:
   level:
     ieims.api1: debug
-    org.keycloak: debug
+    org.keycloak: trace
 server:
   port: 8888
 
