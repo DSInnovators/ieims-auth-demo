@@ -1,7 +1,10 @@
 import NextAuth from "next-auth"
 import KeycloakProvider from "next-auth/providers/keycloak";
 import axios from "axios";
-
+/*
+* @ Thanks
+* https://github.com/nextauthjs/next-auth-refresh-token-example
+*/
 const refreshAccessToken = async (token) => {
     console.log('refresh token!');
     try {
@@ -46,6 +49,9 @@ export default NextAuth({
             issuer: process.env.NEXT_PUBLIC_KEYCLOAK_ISSUER,
         }),
     ],
+    secret: process.env.NEXTAUTH_SECRET,
+    debug: true,
+    //encryption: false,
     callbacks: {
 
         // https://github.com/nextauthjs/next-auth-refresh-token-example/blob/main/pages/api/auth/%5B...nextauth%5D.js

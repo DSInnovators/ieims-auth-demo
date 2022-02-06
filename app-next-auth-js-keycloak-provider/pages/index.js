@@ -26,7 +26,7 @@ export default function Page () {
 
         await axios.get(BASE_URL_STUDENT,config)
             .then(res => {
-                console.log(res);
+                alert(JSON.stringify(res.data));
             })
             .catch(error => {
                     alert('You are not authorize to view the content')
@@ -49,7 +49,7 @@ export default function Page () {
 
         await axios.get('http://localhost:8888/admin/hello',config)
             .then(res => {
-                console.log(res);
+                alert(JSON.stringify(res.data));
             })
             .catch(error => {
                     alert('You are not authorize to view the content')
