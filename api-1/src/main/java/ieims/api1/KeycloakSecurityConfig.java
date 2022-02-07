@@ -9,6 +9,7 @@ import org.keycloak.adapters.springsecurity.client.KeycloakRestTemplate;
 import org.keycloak.adapters.springsecurity.config.KeycloakWebSecurityConfigurerAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Scope;
@@ -17,10 +18,12 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.authority.mapping.SimpleAuthorityMapper;
 import org.springframework.security.web.authentication.session.NullAuthenticatedSessionStrategy;
 import org.springframework.security.web.authentication.session.SessionAuthenticationStrategy;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
+import redis.clients.jedis.JedisPool;
 
 import java.util.Collections;
 import java.util.List;
@@ -72,12 +75,21 @@ public class KeycloakSecurityConfig extends KeycloakWebSecurityConfigurerAdapter
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         super.configure(http);
+        http.addFilterBefore(customAuthFilter(), BasicAuthenticationFilter.class);
         http.authorizeRequests()
                 .antMatchers("/admin/*").hasRole("ADMIN")
                 .antMatchers("/upHello").hasRole("SUPER_ADMIN")
                 .antMatchers("/user/*").hasRole("USER")
                 .anyRequest().denyAll();
         http.cors();
+    }
+
+    /**
+    * Bean for logout blacklisted pre filter
+    */
+    @Bean
+    public CustomAuthFilter customAuthFilter(){
+        return new CustomAuthFilter();
     }
 
     /**
