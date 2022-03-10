@@ -17,6 +17,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.Collections;
+import java.util.List;
 
 @KeycloakConfiguration
 public class KeycloakSecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
@@ -50,7 +51,7 @@ public class KeycloakSecurityConfig extends KeycloakWebSecurityConfigurerAdapter
         super.configure(http);
         http.authorizeRequests()
                 .antMatchers("/admin/*").hasRole("ADMIN")
-                .antMatchers("/upstream/admin/*").hasRole("UP_ADMIN")
+                .antMatchers("/upstream/admin/*").hasRole("SUPER_ADMIN")
                 .antMatchers("/user/*").hasRole("USER")
                 .antMatchers("/upstream/user/*").hasRole("UP_USER")
                 .anyRequest().denyAll();
@@ -59,11 +60,15 @@ public class KeycloakSecurityConfig extends KeycloakWebSecurityConfigurerAdapter
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.applyPermitDefaultValues();
-        configuration.setAllowedMethods(Collections.singletonList("*"));
+        CorsConfiguration config = new CorsConfiguration();
+
+        config.setAllowCredentials(true);
+        config.setAllowedOriginPatterns(List.of("*"));
+        config.addAllowedHeader("*");
+        config.addAllowedMethod("*");
+
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
+        source.registerCorsConfiguration("/**", config);
         return source;
     }
 }

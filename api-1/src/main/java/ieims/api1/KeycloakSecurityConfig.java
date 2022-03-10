@@ -9,6 +9,8 @@ import org.keycloak.adapters.springsecurity.client.KeycloakRestTemplate;
 import org.keycloak.adapters.springsecurity.config.KeycloakWebSecurityConfigurerAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Scope;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -16,11 +18,15 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.authority.mapping.SimpleAuthorityMapper;
 import org.springframework.security.web.authentication.session.NullAuthenticatedSessionStrategy;
 import org.springframework.security.web.authentication.session.SessionAuthenticationStrategy;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
+import redis.clients.jedis.JedisPool;
 
 import java.util.Collections;
+import java.util.List;
 
 @KeycloakConfiguration
 public class KeycloakSecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
@@ -69,11 +75,21 @@ public class KeycloakSecurityConfig extends KeycloakWebSecurityConfigurerAdapter
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         super.configure(http);
+        http.addFilterBefore(customAuthFilter(), BasicAuthenticationFilter.class);
         http.authorizeRequests()
                 .antMatchers("/admin/*").hasRole("ADMIN")
+                .antMatchers("/upHello").hasRole("SUPER_ADMIN")
                 .antMatchers("/user/*").hasRole("USER")
                 .anyRequest().denyAll();
         http.cors();
+    }
+
+    /**
+    * Bean for logout blacklisted pre filter
+    */
+    @Bean
+    public CustomAuthFilter customAuthFilter(){
+        return new CustomAuthFilter();
     }
 
     /**
@@ -81,11 +97,15 @@ public class KeycloakSecurityConfig extends KeycloakWebSecurityConfigurerAdapter
      */
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.applyPermitDefaultValues();
-        configuration.setAllowedMethods(Collections.singletonList("*"));
+        CorsConfiguration config = new CorsConfiguration();
+
+        config.setAllowCredentials(true);
+        config.setAllowedOriginPatterns(List.of("*"));
+        config.addAllowedHeader("*");
+        config.addAllowedMethod("*");
+
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
+        source.registerCorsConfiguration("/**", config);
         return source;
     }
 

@@ -22,7 +22,7 @@
     } ],
     "disableableCredentialTypes" : [ ],
     "requiredActions" : [ ],
-    "realmRoles" : [ "default-roles-development" ],
+    "realmRoles" : [ "USER" ],
     "clientRoles" : {
       "api-2" : [ "UP_USER" ],
       "api-1" : [ "USER" ]
@@ -51,7 +51,7 @@
     } ],
     "disableableCredentialTypes" : [ ],
     "requiredActions" : [ ],
-    "realmRoles" : [ "default-roles-development" ],
+    "realmRoles" : [ "ADMIN" ],
     "clientRoles" : {
       "api-2" : [ "UP_ADMIN" ],
       "api-1" : [ "ADMIN" ],

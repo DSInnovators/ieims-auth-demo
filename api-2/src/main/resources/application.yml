@@ -7,8 +7,8 @@ keycloak:
   auth-server-url: http://localhost:8000/auth
   ssl-required: external
   resource: api-2
-  verify-token-audience: true
-  use-resource-role-mappings: true
+  #verify-token-audience: true
+  use-resource-role-mappings: false
   confidential-port: 0
   principal-attribute: preferred_username
 
